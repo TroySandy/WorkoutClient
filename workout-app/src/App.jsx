@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Sitebar from "./home/Navbar";
+import Sitebar from "./home/Navbar.jsx";
 import Auth from "./auth/Auth.jsx";
+import WorkoutIndex from "./workouts/WorkoutIndex.jsx";
 
 function App() {
   const [sessionToken, setSessionToken] = useState("");
+  
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setSessionToken(localStorage.getItem("token"));
+      console.log("1", sessionToken);
     }
   }, []);
 
@@ -19,14 +22,22 @@ function App() {
 
   const clearToken = () => {
     localStorage.clear();
-    setSessionToken('');
-    console.log('done');
-  }
+    setSessionToken("");
+    console.log("done");
+  };
+
+  const protectedViews = () => {
+    return sessionToken === localStorage.getItem("token") ? (
+      <WorkoutIndex token={sessionToken} />
+    ) : (
+      <Auth updateToken={updateToken} />
+    );
+  };
 
   return (
     <div>
       <Sitebar clickLogout={clearToken} />
-      <Auth updateToken={updateToken} />
+      {protectedViews()}
     </div>
   );
 }

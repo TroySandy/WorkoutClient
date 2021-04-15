@@ -9,19 +9,22 @@ const Signup = (props) => {
     e.preventDefault();
     fetch("http://localhost:4000/user/register", {
       method: "POST",
-      body: JSON.stringify({   //this is where you make the route to the backend, must match it
-          username: username, passwordhash: password ,
+      body: JSON.stringify({
+        //this is where you make the route to the backend, must match it
+        username: username,
+        passwordhash: password,
       }),
       headers: new Headers({
-          "Content-Type": "application/json",
-        }),
+        "Content-Type": "application/json",
+      }),
     })
-    .then((response) => response.json())
-    .then((data) => {
+      .then((response) => response.json())
+      .then((data) => {
         props.updateToken(data.sessionToken);
+        props.updateUserId(data.user.id);
         console.log(data.sessionToken);
-    });
-  };    
+      });
+  };
 
   return (
     <div>
@@ -34,9 +37,12 @@ const Signup = (props) => {
             name="username"
             value={username}
             required
-            
           />
-          {(username === '') ? (<div><p>Username Required</p></div>) : null }
+          {username === "" ? (
+            <div>
+              <p>Username Required</p>
+            </div>
+          ) : null}
         </FormGroup>
         <FormGroup>
           <Label htmlFor="passwordhash">Password</Label>
@@ -44,7 +50,6 @@ const Signup = (props) => {
             onChange={(e) => setPassword(e.target.value)}
             name="passwordhash"
             value={password}
-            
           />
         </FormGroup>
         <Button type="submit">Sign Up</Button>
@@ -55,11 +60,3 @@ const Signup = (props) => {
 
 export default Signup;
 
-
-// const ValidateSignUp = (username) => {
-//     if(username) ? <div></div> : <div>Username required</div>
-// }
-
-// {!result || !result.poster_path ? null : (
-//     <MovieAppDisplay movie={result} />
-//   )}
