@@ -25,6 +25,7 @@ const WorkoutIndex = (props) => {
 
   const fetchWorkouts = () => {
     console.log('fetchworkouts');
+
     fetch(`http://localhost:4000/log/`, {
       method: "GET",
       headers: new Headers({
@@ -50,11 +51,13 @@ const WorkoutIndex = (props) => {
             workouts={workouts}
             token={props.token}
             fetchWorkouts={fetchWorkouts}
+            owner_id={props.owner_id}
           />
         </Col>
         <Col md="9">
           <WorkoutTable
             workouts={workouts}
+            owner_id={props.owner_id}
             token={props.token}
             fetchWorkouts={fetchWorkouts}
             editUpdateWorkout= {editUpdateWorkout}

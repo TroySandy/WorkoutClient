@@ -5,7 +5,7 @@ const WorkoutCreate = (props) => {
   const [description, setDescription] = useState("");
   const [definition, setDefinition] = useState("");
   const [result, setResult] = useState("");
-
+console.log(props);
   let handleSubmit = (e) => {
     console.log('submit',props);
     e.preventDefault();
@@ -15,7 +15,7 @@ const WorkoutCreate = (props) => {
         description: description,
         definition: definition,
         result: result,
-        owner_id: props.workouts[0].owner_id,
+        owner_id: props.owner_id,
       }),
       headers: new Headers({
         "Content-Type": "application/json",

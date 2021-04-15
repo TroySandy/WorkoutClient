@@ -5,20 +5,26 @@ import WorkoutIndex from "./workouts/WorkoutIndex.jsx";
 
 function App() {
   const [sessionToken, setSessionToken] = useState("");
-  
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setSessionToken(localStorage.getItem("token"));
-      console.log("1", sessionToken);
+      // console.log("1", sessionToken);
     }
   }, []);
 
   const updateToken = (newToken) => {
     localStorage.setItem("token", newToken);
     setSessionToken(newToken);
-    console.log(sessionToken);
+    // console.log(sessionToken);
   };
+
+  const updateUserId = (newId) => {
+    localStorage.setItem('owner_id', newId);
+    setUserId(newId);
+    console.log('Updated User Id',userId);
+  }
 
   const clearToken = () => {
     localStorage.clear();
@@ -28,9 +34,9 @@ function App() {
 
   const protectedViews = () => {
     return sessionToken === localStorage.getItem("token") ? (
-      <WorkoutIndex token={sessionToken} />
+      <WorkoutIndex token={sessionToken} owner_id={userId} />
     ) : (
-      <Auth updateToken={updateToken} />
+      <Auth updateToken={updateToken} updateUserId= {updateUserId} />
     );
   };
 
