@@ -21,10 +21,9 @@ const Signup = (props) => {
       .then((response) => response.json())
       .then((data) => {
         props.updateToken(data.sessionToken);
-        props.updateUserId(data.user.id)
-        console.log(data.sessionToken);
-        console.log(data.user.id);
-
+        props.updateUserId(data.user.id);
+        // console.log(data.sessionToken);
+        // console.log(data.user.id);
       });
   };
 
@@ -61,4 +60,3 @@ const Signup = (props) => {
 };
 
 export default Signup;
-

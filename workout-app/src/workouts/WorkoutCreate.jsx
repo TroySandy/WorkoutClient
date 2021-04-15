@@ -1,13 +1,13 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 const WorkoutCreate = (props) => {
   const [description, setDescription] = useState("");
   const [definition, setDefinition] = useState("");
   const [result, setResult] = useState("");
-console.log(props);
+  // console.log(props);
   let handleSubmit = (e) => {
-    console.log('submit',props);
+    // console.log('submit',props);
     e.preventDefault();
     fetch(`http://localhost:4000/log/`, {
       method: "POST",
@@ -24,7 +24,7 @@ console.log(props);
     })
       .then((res) => res.json())
       .then((logData) => {
-        console.log(logData);
+        // console.log(logData);
         setDescription("");
         setDefinition("");
         setResult("");

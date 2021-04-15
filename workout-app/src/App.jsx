@@ -21,22 +21,22 @@ function App() {
   };
 
   const updateUserId = (newId) => {
-    localStorage.setItem('owner_id', newId);
+    localStorage.setItem("owner_id", newId);
     setUserId(newId);
-    console.log('Updated User Id',userId);
-  }
+    // console.log('Updated User Id',userId);
+  };
 
   const clearToken = () => {
     localStorage.clear();
     setSessionToken("");
-    console.log("done");
+    // console.log("done");
   };
 
   const protectedViews = () => {
     return sessionToken === localStorage.getItem("token") ? (
       <WorkoutIndex token={sessionToken} owner_id={userId} />
     ) : (
-      <Auth updateToken={updateToken} updateUserId= {updateUserId} />
+      <Auth updateToken={updateToken} updateUserId={updateUserId} />
     );
   };
 

@@ -21,11 +21,11 @@ const Login = (props) => {
       .then((response) => response.json())
       .then((data) => {
         props.updateToken(data.sessionToken);
-        props.updateUserId(data.user.id)
-        console.log(data);
-        console.log(data.user.id);
+        props.updateUserId(data.user.id);
+        // console.log(data);
+        // console.log(data.user.id);
       });
-    console.log("hello");
+    // console.log("hello");
   };
 
   return (

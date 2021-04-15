@@ -2,29 +2,29 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import WorkoutCreate from "./WorkoutCreate.jsx";
 import WorkoutTable from "./WorkoutTable.jsx";
-import WorkoutEdit from './WorkoutEdit.jsx'
+import WorkoutEdit from "./WorkoutEdit.jsx";
 
 const WorkoutIndex = (props) => {
   const [workouts, setWorkouts] = useState([]);
   const [updateActive, setUpdateActive] = useState(false);
-  const [workoutToUpdate, setWorkoutToUpdate] = useState({})
-  console.log(props);
+  const [workoutToUpdate, setWorkoutToUpdate] = useState({});
+  // console.log(props);
 
   const editUpdateWorkout = (workout) => {
     setWorkoutToUpdate(workout);
-    console.log(workout);
-  }
+    // console.log(workout);
+  };
 
   const updateOn = () => {
-    setUpdateActive(true)
-  }
+    setUpdateActive(true);
+  };
 
   const updateOff = () => {
-    setUpdateActive(false)
-  }
+    setUpdateActive(false);
+  };
 
   const fetchWorkouts = () => {
-    console.log('fetchworkouts');
+    // console.log('fetchworkouts');
 
     fetch(`http://localhost:4000/log/`, {
       method: "GET",
@@ -60,12 +60,20 @@ const WorkoutIndex = (props) => {
             owner_id={props.owner_id}
             token={props.token}
             fetchWorkouts={fetchWorkouts}
-            editUpdateWorkout= {editUpdateWorkout}
+            editUpdateWorkout={editUpdateWorkout}
             updateOn={updateOn}
-
           />
         </Col>
-        {updateActive ? <WorkoutEdit workoutToUpdate={workoutToUpdate} updateOff={updateOff} token={props.token} fetchWorkouts={fetchWorkouts} /> : <></>}
+        {updateActive ? (
+          <WorkoutEdit
+            workoutToUpdate={workoutToUpdate}
+            updateOff={updateOff}
+            token={props.token}
+            fetchWorkouts={fetchWorkouts}
+          />
+        ) : (
+          <></>
+        )}
       </Row>
     </Container>
   );
